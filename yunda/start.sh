@@ -1,0 +1,9 @@
+nohup python crawl.py 1 112920 >> 1.log &
+nohup python crawl.py 2 270774 >> 2.log &
+nohup python crawl.py 3 353172 >> 3.log &
+nohup python crawl.py 4 460009 >> 4.log &
+nohup python crawl.py 5 511352 >> 5.log &
+nohup python crawl.py 6 650269 >> 6.log &
+nohup python crawl.py 7 720201 >> 7.log &
+nohup python crawl.py 8 846845 >> 8.log &
+nohup python crawl.py 9 920219 >> 9.log &
