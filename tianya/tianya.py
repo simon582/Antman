@@ -63,8 +63,13 @@ def crawl(uid):
     handle_replay(uid, replay_url)
 
 if __name__ == "__main__":
+    with open('id.txt','r') as id_file:
+        for uid in id_file.readlines():
+            crawl(uid.strip())
+    '''
     if len(sys.argv) != 2:
         print 'python tianya.py uid'
         exit(-1)
     uid = sys.argv[1]
     crawl(uid)
+    '''
