@@ -5,6 +5,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 from scrapy import Selector
 import json
+import traceback
 
 conf_dict = {}
 with open('dict.conf','r') as conf_file:
@@ -167,7 +168,8 @@ def crawl_content(prod):
 
     # 公告变更原因
     prod['ggbgyy'] = get_content(hxs, '//div[@class="tableBox"]/table/tr[60]/th/text()')
-    prod['ggbgyy'] = prod['ggbgyy'].split('(')[1].split(')')[0]
+    if prod['ggbgyy'].find('(') != -1:
+        prod['ggbgyy'] = prod['ggbgyy'].split('(')[1].split(')')[0]
     print prod
     write_csv(prod)
 
@@ -270,6 +272,7 @@ def work(code, list_url):
             crawl_content(prod)
         except Exception as e:
             print e
+            traceback.print_exc()
    
     next_url = '' 
     a_items = hxs.xpath('//div[@class="AspNetPager"]/a')
