@@ -156,7 +156,7 @@ def stat_cnt(url, date):
     return cnt 
 
 def work(keyword, cur_date):
-    end_date = datetime.datetime(2013, 11, 1)
+    end_date = datetime.datetime(2014, 11, 1)
     for day in range(0, 365):
         dt_date = cur_date - datetime.timedelta(days=day)
         if dt_date < end_date:
