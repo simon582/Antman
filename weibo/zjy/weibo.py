@@ -155,6 +155,11 @@ def stat_cnt(url, date):
     print >> file, resline.encode('utf-8')
     return cnt 
 
+crawled_list = ["20131101", "20131102", "20131103", "20131104", "20131106", "20131107", "20131108", "20131109", "20131112", "20131113", "20131114", "20131115", "20131117", "20131118", "20131119", "20131120", "20131122", "20131123", "20131124", "20131127", "20131128", "20131130", "20131201", "20131202", "20131203", "20131204", "20131205", "20131206", "20131207", "20131208", "20131209", "20131210", "20131211", "20131212", "20131213", "20131215", "20131216", "20131217", "20131218", "20131219", "20131220", "20131221", "20131222", "20131223", "20131224", "20131225", "20131226", "20131227", "20131228", "20131229", "20131230", "20131231"]
+crawled_dict = {}
+for dt in crawled_list:
+    crawled_dict[dt] = 1
+
 def work(keyword, cur_date):
     end_date = datetime.datetime(2014, 11, 1)
     for day in range(0, 365):
@@ -162,6 +167,8 @@ def work(keyword, cur_date):
         if dt_date < end_date:
             return
         date = str(dt_date).split(' ')[0].replace('-','')
+        if date in crawled_dict:
+            continue
         sdate = edate = date
         url = 'http://weibo.cn/search/mblog?hideSearchFrame=&keyword=' + keyword + '&advancedfilter=1&hasori=1&starttime=' + sdate + '&endtime=' + edate + '&sort=time'
         try:
