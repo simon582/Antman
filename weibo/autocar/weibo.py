@@ -103,7 +103,7 @@ def add(key, prod):
 def save_csv(prod, keyword):
     file = open('result.csv','a')
     resline = "微博,新浪微博搜索," + keyword + ","
-    #resline += add('keyword', prod)
+    resline += add('keyword', prod)
     resline += add('weibo_name', prod)
     #resline += add('url', prod)
     resline += add('quote', prod)
@@ -130,8 +130,8 @@ def work(keyword,year,month,day,first):
     if first:
         cur_date = datetime.datetime(year, month, day)
     else:
-        cur_date = datetime.datetime(2015, 1, 31)
-    end_date = datetime.datetime(2015, 1, 1)
+        cur_date = datetime.datetime(2015, 4, 30)
+    end_date = datetime.datetime(2015, 4, 1)
     for day in range(0, 365):
         dt_date = cur_date - datetime.timedelta(days=day)
         if dt_date < end_date:
@@ -149,9 +149,12 @@ if __name__ == '__main__':
     year = int(sys.argv[1])
     month = int(sys.argv[2])
     day = int(sys.argv[3])
-    with open('keywords.conf','r') as file:
-        keyword_list = file.readlines()
+    with open('keywords.conf','r') as key_file, open('brands.conf','r') as brand_file:
+        brand_list = brand_file.readlines()
+        keyword_list = key_file.readlines()
     first = True
-    for keyword in keyword_list:
-        work(keyword.strip(),year,month,day,first)
-        first = False
+    for brand in brand_list:
+        for keyword in keyword_list:
+            mix = brand.strip() + keyword.strip()
+            work(mix, year, month, day, first)
+            first = False
