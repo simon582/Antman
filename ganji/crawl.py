@@ -6,6 +6,7 @@ import cookielib
 import json
 import hashlib
 import re
+import time
 from random import randint
 from scrapy import Selector
 reload(sys)
@@ -25,11 +26,15 @@ def get_html_by_data(url, use_cookie=False, fake_ip=False):
         ip = "%s.%s.%s.%s" % (str(randint(0,255)), str(randint(0,255)), str(randint(0,255)), str(randint(0,255)))
         req.add_header("X-Forwarded-For", ip)
     req.add_header("User-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36")
-    f = opener.open(req)
+    req.add_header("Referer","http://anshan.ganji.com/")
+    f = opener.open(req, timeout=5)
     html = f.read()
     html_file = open('test.html','w')
     print >> html_file, html
     f.close()
+    if html.find('机器人确认') != -1:
+        print 'Spider is detected by robot.'
+        exit(-1)
     return html
 
 def filter(title):
@@ -40,50 +45,66 @@ def filter(title):
 def work_zypx(city, cat, url, page):
     print city + ' ' + cat + ' ' + url + ' ' + str(page)
     url += '/o' + str(page)
-    print url    
-    hxs = Selector(text=get_html_by_data(url, fake_ip=True))
+    print url 
+    hxs = Selector(text=get_html_by_data(url, use_cookie=True, fake_ip=True))
     li_list = hxs.xpath("//li[@class='list-img clearfix']|//li[@class='list-noimg clearfix']")
     print 'len: ' + str(len(li_list))
+    titles = ""
     for li in li_list:
         try:
             prod = {}
+            prod['city'] = city
+            prod['cat'] = cat
             prod['title'] = ""
             title_list = li.xpath('.//a[@class="list-info-title"]/text()|.//a[@class="list-info-title"]/span/text()')
             for title in title_list:
                 prod['title'] += title.extract().replace(' ','').strip()
             print 'title: ' + prod['title']
+            titles += prod['title']
             if filter(prod['title']):
                 continue
             prod['url'] = li.xpath('.//a[@class="list-info-title"]/@href')[0].extract()
+            if prod['url'].find('http://') == -1:
+                prod['url'] = 'http://' + url.split('/')[2] + prod['url']
             print 'url: ' + prod['url']
             crawl_prod(prod)
+            time.sleep(1)
         except Exception as e:
             print e
             continue
+    return hashlib.md5(titles).hexdigest()
 
-def work_others(city, cat, url):
+def work_others(city, cat, url, page):
     print city + ' ' + cat + ' ' + url + str(page)
     url += '/o' + str(page)
-    print url    
-    hxs = Selector(text=get_html_by_data(url, fake_ip=True))
+    print url
+    hxs = Selector(text=get_html_by_data(url, use_cookie=True, fake_ip=True))
     li_list = hxs.xpath("//li[@class='list-img clearfix']|//li[@class='list-noimg clearfix']")
     print 'len: ' + str(len(li_list))
+    titles = ""
     for li in li_list:
         try:
             prod = {}
+            prod['city'] = city
+            prod['cat'] = cat
             prod['title'] = ""
             title_list = li.xpath('.//a[@class="f14"]/text()|.//a[@class="f14 log_count"]/text()')
             for title in title_list:
                 prod['title'] += title.extract().replace(' ','').strip()
             print 'title: ' + prod['title']
+            titles += prod['title']
             if filter(prod['title']):
                 continue
             prod['url'] = li.xpath('.//a[@class="f14"]/@href|.//a[@class="f14 log_count"]/@href')[0].extract()
+            if prod['url'].find('http://') == -1:
+                prod['url'] = 'http://' + url.split('/')[2] + prod['url']
             print 'url: ' + prod['url']
             crawl_prod(prod)
+            time.sleep(1)
         except Exception as e:
             print e
             continue
+    return hashlib.md5(titles).hexdigest()
 
 def handle_details(prod, key, value):
     if key == "联系人":
@@ -105,9 +126,23 @@ def handle_details(prod, key, value):
         prod['qq'] = value.replace('QQ','').replace('：','').replace(':','').strip()
         print 'qq: ' + prod['qq'] 
 
+def handle_img(prod):
+    url = prod['img_url']
+    file_path = './img/'
+    file_name = hashlib.md5(url.encode('utf8')).hexdigest().upper() + '.png'
+    data = urllib2.urlopen(url).read()
+    prod['tel'] = file_name
+    print 'tel: ' + prod['tel']
+    f = file(file_path + file_name, 'wb')
+    f.write(data)
+    f.close()
+
 def crawl_prod(prod):
-    prod['url'] = 'http://anshan.ganji.com/jixujiaoyurenzheng/1559316326x.htm'
-    hxs = Selector(text=get_html_by_data(prod['url'], fake_ip=True))
+    hxs = Selector(text=get_html_by_data(prod['url'], use_cookie=True, fake_ip=True))
+    # date
+    prod['date'] = hxs.xpath('//i[@class="f10 pr-5"]/text()|//p[@class="p1"]/span[@class="mr35"][1]/text()')[0].extract()
+    prod['date'] = prod['date'].strip().replace('发布时间：','')
+    print 'date: ' + prod['date']
     li_list = hxs.xpath('//ul[@class="cont-info clearfix"]/li')
     if len(li_list) > 0:
         for li in li_list:
@@ -121,7 +156,7 @@ def crawl_prod(prod):
             #print key + value
             handle_details(prod, key, value)
     else:
-        li_list = hxs.xpath('//div[@class="info"]/ul/li')
+        li_list = hxs.xpath('//div[@class="info"][1]/ul/li')
         if len(li_list) == 0:
             return
         for li in li_list:
@@ -131,18 +166,46 @@ def crawl_prod(prod):
                 #print key + value
                 handle_details(prod, key, value)
                 if key == '联系电话':
-                    img_url = 'http://anshan.ganji.com/' + li.xpath('./p/span/img/@src')[0].extract()
-                    print 'img_url: ' + img_url 
+                    prod['img_url'] = 'http://anshan.ganji.com/' + li.xpath('./p/span/img/@src')[0].extract()
+                    print 'img_url: ' + prod['img_url']
+                    handle_img(prod)
             except:
                 continue
-    import pdb;pdb.set_trace()
-    #save_csv(prod) 
+    print prod
+    save_csv(prod) 
 
-def work(city, cat, url, page):
-    if cat == '职业培训':
-        return work_zypx(city, cat, url, page)
+def add(key, prod):
+    if prod.has_key(key):
+        return prod[key].replace('\n','').replace('\r','').replace(',',' ').strip() + ','
     else:
-        return work_others(city, cat, url, page) 
+        print 'Cannot find key: ' + key
+        return ','
+
+def save_csv(prod):
+    file = open('csv/' + prod['city'] + '.csv','a')
+    resline = ""
+    resline += add('city', prod)
+    resline += add('cat', prod)
+    resline += add('title', prod)
+    resline += add('contact', prod)
+    resline += add('qq', prod)
+    resline += add('tel', prod)
+    resline += add('date', prod)
+    print >> file, resline.encode('utf-8')
+
+def work(city, cat, url):
+    hash_code = ''
+    page = 1
+    while True:
+        if cat == '职业培训':
+            new_code = work_zypx(city, cat, url, page)
+        else:
+            new_code = work_others(city, cat, url, page)
+        if hash_code == new_code:
+            break
+        hash_code = new_code
+        page += 1
+        time.sleep(1)
 
 if __name__ == "__main__":
     with open('cat_list') as cat_file, open('city_list') as city_file:
@@ -155,9 +218,7 @@ if __name__ == "__main__":
                 cat_name = cat_line.split(',')[0]
                 cat = cat_line.split(',')[1].strip()
                 try:
-                    page = 1
-                    while work(city_name, cat_name, url + cat, page):
-                        page += 1
+                    work(city_name, cat_name, url + cat)
                 except Exception as e:
                     print e
                     print 'Do not find: ' + city_name + ' ' + cat_name
