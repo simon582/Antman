@@ -7,10 +7,38 @@ import json
 import hashlib
 import re
 import time
+import random
 from random import randint
 from scrapy import Selector
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+proxy_ip_list = []
+with open('/root/proxy/proxy_list.txt','r') as proxy_file:
+    for line in proxy_file.readlines():
+        proxy_ip_list.append(line.strip())
+
+def get_html_by_data_new(url, use_cookie=False):
+    while True:
+        session = requests.Session()
+        proxy = random.choice(proxy_ip_list)
+        proxies = {
+                'http': 'http://'+proxy,
+                'https': 'http://'+proxy,
+        }
+        headers = {
+            'Host': 'gz.ganji.com',
+            'Referer': 'http://gz.ganji.com/',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36',
+        }
+        r = session.get(prod['apk_url'], headers=headers, proxies=proxies)
+        if r.content.find('机器人确认') != -1:
+            continue
+        else:
+            f = file('test.html', 'w')
+            f.write(r.content)
+            f.close()
+            return r.content
 
 def get_html_by_data(url, use_cookie=False, fake_ip=False):
     data = {}
@@ -68,7 +96,7 @@ def work_zypx(city, cat, url, page):
                 prod['url'] = 'http://' + url.split('/')[2] + prod['url']
             print 'url: ' + prod['url']
             crawl_prod(prod)
-            time.sleep(1)
+            time.sleep(1.5)
         except Exception as e:
             print e
             continue
@@ -100,7 +128,7 @@ def work_others(city, cat, url, page):
                 prod['url'] = 'http://' + url.split('/')[2] + prod['url']
             print 'url: ' + prod['url']
             crawl_prod(prod)
-            time.sleep(1)
+            time.sleep(1.5)
         except Exception as e:
             print e
             continue
@@ -205,7 +233,6 @@ def work(city, cat, url):
             break
         hash_code = new_code
         page += 1
-        time.sleep(1)
 
 if __name__ == "__main__":
     with open('cat_list') as cat_file, open('city_list') as city_file:
