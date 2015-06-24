@@ -48,18 +48,6 @@ def add(key, prod):
         return prod[key].replace(',',' ').replace('\n','').replace('\r','').replace('\t','').strip() + ','
     return ','
 
-def write_csv(prod):
-    file = open('result.csv','a')
-    resline = ""
-    resline += add('title',prod)
-    resline += add('name',prod)
-    resline += add('addr',prod)
-    resline += add('star',prod)
-    resline += add('open_year',prod)
-    resline += add('room_cnt',prod)
-    resline += add('tel',prod)
-    print >> file, resline.encode('utf-8')
-
 def crawl_prod(url, prod):
     hxs = Selector(text=get_html_by_data(url))
     try:
@@ -126,7 +114,7 @@ if __name__ == '__main__':
     reset()
     start_page = int(sys.argv[1])
     first = True
-    for id in range(24, 2001):
+    for id in range(1, 2001):
         try:
             print 'current id: ' + str(id)
             if first:

@@ -130,8 +130,8 @@ def work(keyword,year,month,day,first):
     if first:
         cur_date = datetime.datetime(year, month, day)
     else:
-        cur_date = datetime.datetime(2015, 4, 30)
-    end_date = datetime.datetime(2015, 4, 1)
+        cur_date = datetime.datetime(2015, 5, 17)
+    end_date = datetime.datetime(2015, 5, 1)
     for day in range(0, 365):
         dt_date = cur_date - datetime.timedelta(days=day)
         if dt_date < end_date:

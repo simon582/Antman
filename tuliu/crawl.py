@@ -49,7 +49,7 @@ def save_csv(prod):
     resline += add('year_limit', prod)
     resline += add('price', prod)
     resline += add('pay_type', prod)
-    print >> file, resline.encode('utf-8')
+    print >> file, resline.encode('gbk')
 
 def crawl_details(prod):
     hxs = Selector(text=get_html_by_data(prod['url'], fake_ip=True))
@@ -74,14 +74,14 @@ def crawl_details(prod):
             prod['area'] = val
         if key == "使用权年限":
             prod['year_limit'] = val
-        if key == "价格":
+        if key == "价格" or key == "一口价":
             prod['price'] = val
         if key == "付款方式":
             prod['pay_type'] = val
 
 def work(page):
     url = 'http://www.tuliu.com/list-pg' + str(page) + '.html#sub_list_b'
-    print url
+    print 'Current page: ' + str(page) + ' list url:' + url
     hxs = Selector(text=get_html_by_data(url, fake_ip=True))
     dl_list = hxs.xpath("//div[@class='list_list']/dl")
     print "len: " + str(len(dl_list))
@@ -92,17 +92,18 @@ def work(page):
             prod['title'] = dl.xpath('.//h2/a/text()')[0].extract().strip()
             print 'title: ' + prod['title']
             prod['url'] = dl.xpath('.//h2/a/@href')[0].extract().strip()
-            print 'url: ' + prod['url']
+            print 'detail url: ' + prod['url']
             prod['region'] = dl.xpath('.//p[@class="gre"]/text()')[0].extract().strip()
             print 'region: ' + prod['region']
             crawl_details(prod)
             save_csv(prod)
-            import pdb;pdb.set_trace()
+            #import pdb;pdb.set_trace()
         except Exception as e:
             print e
             continue
 
 if __name__ == "__main__":
+    '''
     if len(sys.argv) != 3:
         print 'cmd: python crawl.py start_page end_page'
         exit(-1)
@@ -113,9 +114,13 @@ if __name__ == "__main__":
         print e
         print 'parameters error'
         exit(-1)
+    '''
+    start_page = 1
+    end_page = 2
     for page in range(start_page, end_page+1):
         try:
             work(page)
         except Exception as e:
             print 'Cannot crawl page: ' + str(page)
             break
+    print 'Crawl finished from page %s to %s.'%(str(start_page), str(end_page))
