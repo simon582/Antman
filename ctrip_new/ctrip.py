@@ -77,15 +77,18 @@ def crawl_price(prod, hxs):
     print >> file, html
     file.close()
     pri_hxs = Selector(text=html)
-    prod['price'] = pri_hxs.xpath('//span[@class="price"]/text()')[0].extract()
-    print 'price: ' + prod['price']
+    try:
+        prod['price'] = pri_hxs.xpath('//span[@class="price"]/text()')[0].extract()
+        print 'price: ' + prod['price']
+    except:
+        print 'Price is illegal'
+        prod['price'] = "专享价"
     img_title_list = pri_hxs.xpath('//img/@title')
     for img_title in img_title_list:
         room_name = img_title.extract()
+        prod['seaView'] = False 
         if room_name.find('海景') != -1:
             prod['seaView'] = True
-        else:
-            prod['seaView'] = False 
 
 def crawl_gps(prod, hxs):
     prod['latitude'] = hxs.xpath('//meta[@itemprop="latitude"]/@content')[0].extract()
@@ -165,8 +168,8 @@ def crawl_prod(prod):
         prod['scoreNum'] = hxs.xpath('//a[@class="commnet_score"]/@title')[0].extract()
         print 'scoreNum: ' + prod['scoreNum']
         crawl_gps(prod, hxs)
-        crawl_price(prod, hxs)
         crawl_pic(prod, hxs)
+        crawl_price(prod, hxs)
     except Exception as e:
         print e
 
@@ -190,7 +193,6 @@ def crawl_list(title, list_url):
             prod['businessDistrict'] = item.xpath('.//p[@class="searchresult_htladdress"]/a/text()')[0].extract()
             print 'businessDistrict: ' + prod['businessDistrict']
             crawl_prod(prod)
-            #import pdb;pdb.set_trace()
             save(prod)
         except Exception as e:
             print e
