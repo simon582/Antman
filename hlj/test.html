@@ -1,0 +1,782 @@
+<!doctype html>
+<html ng-app="chatApp">
+<head>
+  <link href="http://7u2iwv.com2.z0.glb.qiniucdn.com/marrymemo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <meta property="qc:admins" content="165155514665122155576375" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+  <META HTTP-EQUIV="Expires" CONTENT="0">
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="vOaz8ZdJ4scsLwG6OXogwurkZx6C/La/7qG+6Zfx7IM=" name="csrf-token" />
+
+  <link href="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/common/v4/layout-6cc1c1d9f495315e2194a809a9d0f43977ce242fa370e47a9a60a6335d4810bb.css" media="screen" rel="stylesheet" />
+  <link href="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/exhibit/merc-main-f3bce97e3f74d24aaaa7c8c3dc6b53c205eed6fcf7dc57b80dfa0660e747c185.css" media="screen" rel="stylesheet" />
+
+  
+
+      <script>  (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-44053654-1', 'auto');
+    ga('send', 'pageview');</script>
+
+  <title>婚礼纪 - 打造完美婚礼，谱写婚礼故事</title>
+  <meta name="description" content="婚礼纪官方网站，最好的婚礼APP，发送请帖，邀请宾客互动，分享结婚故事，帮你轻轻松松筹备婚礼，购买婚纱礼服，寻找四大金刚，婚礼策划。结婚从此变得简单。">
+  <meta name="keywords" content="婚礼纪，婚礼APP，结婚攻略，婚礼策划，电子请帖，婚礼故事，四大金刚">
+</head>
+<body data-location="/exhibit?cid=87&amp;page=1&amp;property=8&amp;sort=default" ng-controller="MainController as mainCtrl">
+<!-- 头部导航 -->
+    <div class="merc-header">
+        <div class="merc-header-con">
+            <a href="http://hunliji.com/" class="merc-logo" title="婚礼纪" alt="婚礼纪">婚礼纪</a>
+            <i class="merc-split"></i>
+          <dl class="merc-city">
+  <dt>
+    <span class="city">合肥</span>
+    <span class="change">[更换]</span>
+  </dt>
+  <dd class="ddcity">
+    <dl id="city-this">
+      <dt>
+        当前城市<strong>合肥</strong>
+      </dt>
+      <dd>
+        <h5>热门城市</h5>
+        <div class="hotcity">
+            <div><em id="all-city"><a style="font-weight:700">全国</a></em>
+                  <a href="#" cid="1" class="city-target">北京</a>
+                  <a href="#" cid="3" class="city-target">上海</a>
+                  <a href="#" cid="190" class="city-target">广州</a>
+                  <a href="#" cid="200" class="city-target">深圳</a>
+                  <a href="#" cid="78" class="city-target">杭州</a>
+                  <a href="#" cid="63" class="city-target">南京</a>
+                  <a href="#" cid="66" class="city-target">苏州</a>
+                  <a href="#" cid="225" class="city-target">成都</a>
+            </div>
+        </div>
+      </dd>
+      
+    </dl>
+    <h3>按拼音首字母查找</h3>
+    <div class="city-select">
+
+                  <span>A</span>
+
+                  <span>B</span>
+
+                  <span>C</span>
+
+                  <span>D</span>
+
+                  <span>E</span>
+
+                  <span>F</span>
+
+                  <span>G</span>
+
+                  <span class="hover">H</span>
+
+                  <span>J</span>
+
+                  <span>K</span>
+
+                  <span>L</span>
+
+                  <span>M</span>
+
+                  <span>N</span>
+
+                  <span>P</span>
+
+                  <span>Q</span>
+
+                  <span>R</span>
+
+                  <span>S</span>
+
+                  <span>T</span>
+
+                  <span>W</span>
+
+                  <span>X</span>
+
+                  <span>Y</span>
+
+                  <span>Z</span>
+
+    </div>
+    <ul class="city-con">
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=30 >鞍山</a>
+                        <a href="javascript:;" class="city-target" cid=94 >安庆</a>
+                        <a href="javascript:;" class="city-target" cid=160 >襄樊市</a>
+                        <a href="javascript:;" class="city-target" cid=248 >安顺</a>
+                        <a href="javascript:;" class="city-target" cid=243 >阿坝</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=1 >北京</a>
+                        <a href="javascript:;" class="city-target" cid=353 >包头</a>
+                        <a href="javascript:;" class="city-target" cid=7 >保定</a>
+                        <a href="javascript:;" class="city-target" cid=320 >北海</a>
+                        <a href="javascript:;" class="city-target" cid=89 >蚌埠</a>
+                        <a href="javascript:;" class="city-target" cid=32 >本溪</a>
+                        <a href="javascript:;" class="city-target" cid=134 >滨州</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=225 >成都</a>
+                        <a href="javascript:;" class="city-target" cid=4 >重庆</a>
+                        <a href="javascript:;" class="city-target" cid=177 >长沙</a>
+                        <a href="javascript:;" class="city-target" cid=73 >常州</a>
+                        <a href="javascript:;" class="city-target" cid=41 >长春</a>
+                        <a href="javascript:;" class="city-target" cid=357 >赤峰</a>
+                        <a href="javascript:;" class="city-target" cid=9 >承德</a>
+                        <a href="javascript:;" class="city-target" cid=38 >朝阳</a>
+                        <a href="javascript:;" class="city-target" cid=181 >郴州</a>
+                        <a href="javascript:;" class="city-target" cid=99 >巢湖</a>
+                        <a href="javascript:;" class="city-target" cid=12 >沧州</a>
+                        <a href="javascript:;" class="city-target" cid=22 >长治</a>
+                        <a href="javascript:;" class="city-target" cid=342 >昌吉</a>
+                        <a href="javascript:;" class="city-target" cid=182 >常德</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=29 >大连</a>
+                        <a href="javascript:;" class="city-target" cid=210 >东莞</a>
+                        <a href="javascript:;" class="city-target" cid=244 >德阳</a>
+                        <a href="javascript:;" class="city-target" cid=62 >大庆</a>
+                        <a href="javascript:;" class="city-target" cid=128 >德州</a>
+                        <a href="javascript:;" class="city-target" cid=221 >定西</a>
+                        <a href="javascript:;" class="city-target" cid=230 >达州</a>
+                        <a href="javascript:;" class="city-target" cid=33 >丹东</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=358 >鄂尔多斯</a>
+                        <a href="javascript:;" class="city-target" cid=161 >鄂州</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=104 >福州</a>
+                        <a href="javascript:;" class="city-target" cid=202 >佛山</a>
+                        <a href="javascript:;" class="city-target" cid=36 >阜新</a>
+                        <a href="javascript:;" class="city-target" cid=118 >抚州</a>
+                        <a href="javascript:;" class="city-target" cid=31 >抚顺</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=190 >广州</a>
+                        <a href="javascript:;" class="city-target" cid=246 >贵阳</a>
+                        <a href="javascript:;" class="city-target" cid=312 >桂林</a>
+                        <a href="javascript:;" class="city-target" cid=121 >赣州</a>
+                        <a href="javascript:;" class="city-target" cid=245 >广元</a>
+                  </li>
+                  <li  style="display:block;">
+                            <a href="javascript:;" class="city-target" cid=78 >杭州</a>
+                            <a href="javascript:;" class="city-target" cid=50 >哈尔滨</a>
+                            <a href="javascript:;" class="city-target" cid=87 class="hover">合肥</a>
+                            <a href="javascript:;" class="city-target" cid=255 >海口</a>
+                            <a href="javascript:;" class="city-target" cid=405 >海外</a>
+                            <a href="javascript:;" class="city-target" cid=352 >呼和浩特</a>
+                            <a href="javascript:;" class="city-target" cid=188 >怀化</a>
+                            <a href="javascript:;" class="city-target" cid=5 >邯郸</a>
+                            <a href="javascript:;" class="city-target" cid=90 >淮南</a>
+                            <a href="javascript:;" class="city-target" cid=195 >惠州</a>
+                            <a href="javascript:;" class="city-target" cid=163 >黄冈</a>
+                            <a href="javascript:;" class="city-target" cid=79 >湖州</a>
+                            <a href="javascript:;" class="city-target" cid=180 >衡阳</a>
+                            <a href="javascript:;" class="city-target" cid=371 >香港</a>
+                            <a href="javascript:;" class="city-target" cid=351 >呼伦贝尔</a>
+                            <a href="javascript:;" class="city-target" cid=278 >红河</a>
+                            <a href="javascript:;" class="city-target" cid=206 >河源</a>
+                            <a href="javascript:;" class="city-target" cid=164 >黄石</a>
+                            <a href="javascript:;" class="city-target" cid=71 >淮安</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=125 >济南</a>
+                        <a href="javascript:;" class="city-target" cid=85 >金华</a>
+                        <a href="javascript:;" class="city-target" cid=80 >嘉兴</a>
+                        <a href="javascript:;" class="city-target" cid=116 >九江</a>
+                        <a href="javascript:;" class="city-target" cid=42 >吉林</a>
+                        <a href="javascript:;" class="city-target" cid=131 >济宁</a>
+                        <a href="javascript:;" class="city-target" cid=122 >景德镇</a>
+                        <a href="javascript:;" class="city-target" cid=196 >江门</a>
+                        <a href="javascript:;" class="city-target" cid=21 >晋中</a>
+                        <a href="javascript:;" class="city-target" cid=193 >揭阳</a>
+                        <a href="javascript:;" class="city-target" cid=34 >锦州</a>
+                        <a href="javascript:;" class="city-target" cid=23 >晋城</a>
+                        <a href="javascript:;" class="city-target" cid=151 >济源</a>
+                        <a href="javascript:;" class="city-target" cid=166 >荆州</a>
+                        <a href="javascript:;" class="city-target" cid=172 >荆门</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=276 >昆明</a>
+                        <a href="javascript:;" class="city-target" cid=149 >开封</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=72 >连云港</a>
+                        <a href="javascript:;" class="city-target" cid=211 >兰州</a>
+                        <a href="javascript:;" class="city-target" cid=150 >洛阳</a>
+                        <a href="javascript:;" class="city-target" cid=311 >柳州</a>
+                        <a href="javascript:;" class="city-target" cid=37 >辽阳</a>
+                        <a href="javascript:;" class="city-target" cid=11 >廊坊</a>
+                        <a href="javascript:;" class="city-target" cid=100 >六安</a>
+                        <a href="javascript:;" class="city-target" cid=84 >丽水</a>
+                        <a href="javascript:;" class="city-target" cid=24 >临汾</a>
+                        <a href="javascript:;" class="city-target" cid=133 >临沂</a>
+                        <a href="javascript:;" class="city-target" cid=238 >乐山</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=228 >绵阳</a>
+                        <a href="javascript:;" class="city-target" cid=91 >马鞍山</a>
+                        <a href="javascript:;" class="city-target" cid=194 >茂名</a>
+                        <a href="javascript:;" class="city-target" cid=239 >眉山</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=63 >南京</a>
+                        <a href="javascript:;" class="city-target" cid=115 >南昌</a>
+                        <a href="javascript:;" class="city-target" cid=81 >宁波</a>
+                        <a href="javascript:;" class="city-target" cid=229 >南充</a>
+                        <a href="javascript:;" class="city-target" cid=308 >南宁</a>
+                        <a href="javascript:;" class="city-target" cid=148 >南阳</a>
+                        <a href="javascript:;" class="city-target" cid=67 >南通</a>
+                        <a href="javascript:;" class="city-target" cid=106 >宁德</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=39 >盘锦</a>
+                        <a href="javascript:;" class="city-target" cid=146 >平顶山</a>
+                        <a href="javascript:;" class="city-target" cid=154 >濮阳</a>
+                        <a href="javascript:;" class="city-target" cid=218 >平凉</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=126 >青岛</a>
+                        <a href="javascript:;" class="city-target" cid=108 >泉州</a>
+                        <a href="javascript:;" class="city-target" cid=15 >秦皇岛</a>
+                        <a href="javascript:;" class="city-target" cid=279 >曲靖</a>
+                        <a href="javascript:;" class="city-target" cid=77 >衢州</a>
+                        <a href="javascript:;" class="city-target" cid=207 >清远</a>
+                        <a href="javascript:;" class="city-target" cid=258 >琼海市</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=138 >日照</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=3 >上海</a>
+                        <a href="javascript:;" class="city-target" cid=200 >深圳</a>
+                        <a href="javascript:;" class="city-target" cid=66 >苏州</a>
+                        <a href="javascript:;" class="city-target" cid=27 >沈阳</a>
+                        <a href="javascript:;" class="city-target" cid=256 >三亚</a>
+                        <a href="javascript:;" class="city-target" cid=6 >石家庄</a>
+                        <a href="javascript:;" class="city-target" cid=141 >商丘</a>
+                        <a href="javascript:;" class="city-target" cid=82 >绍兴</a>
+                        <a href="javascript:;" class="city-target" cid=199 >汕头</a>
+                        <a href="javascript:;" class="city-target" cid=170 >十堰</a>
+                        <a href="javascript:;" class="city-target" cid=231 >遂宁</a>
+                        <a href="javascript:;" class="city-target" cid=111 >三明</a>
+                        <a href="javascript:;" class="city-target" cid=117 >上饶</a>
+                        <a href="javascript:;" class="city-target" cid=48 >松原</a>
+                        <a href="javascript:;" class="city-target" cid=98 >宿州</a>
+                        <a href="javascript:;" class="city-target" cid=158 >三门峡</a>
+                        <a href="javascript:;" class="city-target" cid=237 >内江</a>
+                        <a href="javascript:;" class="city-target" cid=171 >随州</a>
+                        <a href="javascript:;" class="city-target" cid=197 >韶关</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=2 >天津</a>
+                        <a href="javascript:;" class="city-target" cid=18 >太原</a>
+                        <a href="javascript:;" class="city-target" cid=86 >台州</a>
+                        <a href="javascript:;" class="city-target" cid=10 >唐山</a>
+                        <a href="javascript:;" class="city-target" cid=132 >泰安</a>
+                        <a href="javascript:;" class="city-target" cid=93 >铜陵</a>
+                        <a href="javascript:;" class="city-target" cid=28 >铁岭</a>
+                        <a href="javascript:;" class="city-target" cid=366 >台中市</a>
+                        <a href="javascript:;" class="city-target" cid=251 >铜仁</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=159 >武汉</a>
+                        <a href="javascript:;" class="city-target" cid=64 >无锡</a>
+                        <a href="javascript:;" class="city-target" cid=83 >温州</a>
+                        <a href="javascript:;" class="city-target" cid=340 >乌鲁木齐</a>
+                        <a href="javascript:;" class="city-target" cid=88 >芜湖</a>
+                        <a href="javascript:;" class="city-target" cid=130 >潍坊</a>
+                        <a href="javascript:;" class="city-target" cid=330 >吴忠</a>
+                        <a href="javascript:;" class="city-target" cid=301 >渭南</a>
+                        <a href="javascript:;" class="city-target" cid=355 >乌兰察布</a>
+                        <a href="javascript:;" class="city-target" cid=136 >威海</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=297 >西安</a>
+                        <a href="javascript:;" class="city-target" cid=105 >厦门</a>
+                        <a href="javascript:;" class="city-target" cid=70 >徐州</a>
+                        <a href="javascript:;" class="city-target" cid=147 >信阳</a>
+                        <a href="javascript:;" class="city-target" cid=145 >许昌</a>
+                        <a href="javascript:;" class="city-target" cid=14 >邢台</a>
+                        <a href="javascript:;" class="city-target" cid=144 >新乡</a>
+                        <a href="javascript:;" class="city-target" cid=17 >忻州</a>
+                        <a href="javascript:;" class="city-target" cid=290 >西宁</a>
+                        <a href="javascript:;" class="city-target" cid=178 >湘潭</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=69 >盐城</a>
+                        <a href="javascript:;" class="city-target" cid=68 >扬州</a>
+                        <a href="javascript:;" class="city-target" cid=129 >烟台</a>
+                        <a href="javascript:;" class="city-target" cid=167 >宜昌</a>
+                        <a href="javascript:;" class="city-target" cid=176 >岳阳</a>
+                        <a href="javascript:;" class="city-target" cid=328 >银川</a>
+                        <a href="javascript:;" class="city-target" cid=300 >榆林</a>
+                        <a href="javascript:;" class="city-target" cid=189 >永州</a>
+                        <a href="javascript:;" class="city-target" cid=299 >延安</a>
+                        <a href="javascript:;" class="city-target" cid=20 >阳泉</a>
+                        <a href="javascript:;" class="city-target" cid=192 >阳江</a>
+                        <a href="javascript:;" class="city-target" cid=35 >营口</a>
+                        <a href="javascript:;" class="city-target" cid=43 >延边</a>
+                        <a href="javascript:;" class="city-target" cid=183 >益阳</a>
+                        <a href="javascript:;" class="city-target" cid=61 >伊春</a>
+                  </li>
+                  <li>
+                        <a href="javascript:;" class="city-target" cid=142 >郑州</a>
+                        <a href="javascript:;" class="city-target" cid=205 >中山</a>
+                        <a href="javascript:;" class="city-target" cid=179 >株洲</a>
+                        <a href="javascript:;" class="city-target" cid=76 >舟山</a>
+                        <a href="javascript:;" class="city-target" cid=137 >枣庄</a>
+                        <a href="javascript:;" class="city-target" cid=204 >湛江</a>
+                        <a href="javascript:;" class="city-target" cid=127 >淄博</a>
+                        <a href="javascript:;" class="city-target" cid=227 >自贡</a>
+                        <a href="javascript:;" class="city-target" cid=109 >漳州</a>
+                        <a href="javascript:;" class="city-target" cid=201 >珠海</a>
+                        <a href="javascript:;" class="city-target" cid=236 >资阳</a>
+                        <a href="javascript:;" class="city-target" cid=247 >遵义</a>
+                        <a href="javascript:;" class="city-target" cid=217 >张掖</a>
+                        <a href="javascript:;" class="city-target" cid=65 >镇江</a>
+                        <a href="javascript:;" class="city-target" cid=155 >周口</a>
+                        <a href="javascript:;" class="city-target" cid=187 >张家界</a>
+                  </li>
+    </ul>
+  </dd>
+</dl>
+
+          <div class="merc-nav">
+  <a href="/">首页</a>
+  <a href="/exhibit/set_meals?sort=default" class="hover">婚博汇</a>
+  <a href="/group" class="">新娘说</a>
+  <a class="wechat-wall" data-user="null" href="">微信墙</a>
+</div>
+
+          <span class="merc-in">
+  <dl class="merc-user">
+    <dt class="user-name">
+          <span class="user-login" id="user_login">用户登录</span>
+    </dt>
+    <dd>
+      <a href="/my/favorites/works">个人主页</a>
+      <a href="/my/stories/new">创建故事</a>
+      <a class="wechat-wall" data-user="null" href="">微信墙</a>
+      <a href="/my/notifications/chat">消息管理<i class="mes"></i></a>
+      <a href="/my/accounts/edit">修改资料</a>
+      
+    </dd>
+  </dl>
+  <i class="merc-split"></i>
+  <a href="/p/wedding/Public/admin/account/login.html">进入商家中心</a>
+  <i class="merc-split"></i>
+  <a href="/temp_index">进入旧版商家中心</a>
+</span>
+
+        </div>
+    </div>
+
+  
+
+<!-- 主体内容 -->
+<div class="merc-wrap">
+    <!-- 子导航 subnav -->
+    <div class="merc-subnav">
+	<a href="/exhibit/set_meals?property=2&amp;sort=default" class=>套餐</a><i>|</i>
+	<a href="/exhibit/set_meals/work_index?property=2&amp;sort=default" class=>案例</a><i>|</i>
+	<a href="/exhibit/merchants?property=2&amp;sort=default" class=hover>商家</a>
+</div>
+
+    <!-- 选项卡 -->
+    <dl class="merc-tabs">
+        <dt class="merc-tabtit">
+            <div class="tabs-left">
+                    <a href="/exhibit?property=2" class="">婚礼策划</a>
+                    <a href="/exhibit?property=6" class="">婚纱摄影</a>
+                    <a href="/exhibit?property=7" class="">摄影师</a>
+                    <a href="/exhibit?property=8" class="hover">摄像师</a>
+                    <a href="/exhibit?property=9" class="">化妆师</a>
+                    <a href="/exhibit?property=11" class="">主持人</a>
+            </div>
+            <div class="tabs-right">
+                <dl class="tabs-sort">
+                    <dt>排序<i class="arrow"></i></dt>
+                    <dd>
+                        <h3>排序</h3>
+                        <a href="/exhibit?cid=87&amp;page=1&amp;property=8&amp;sort=default" class="hover">默认排序</a>
+                        <a href="/exhibit?cid=87&amp;page=1&amp;property=8&amp;sort=fan" class="">喜欢最多</a>
+                        <a href="/exhibit?cid=87&amp;page=1&amp;property=8&amp;sort=work" class="">作品最多</a>
+                    </dd>
+                </dl>
+
+              <div class="tabs-search">
+                <form action="/exhibit?cid=87&amp;page=3&amp;property=8&amp;sort=default">
+                  <input class="text" id="search" name="search" placeholder="搜索……" type="text" />
+                  <input class="btn" name="commit" type="submit" value="" />
+                  <div class="search_params"><input id="cid" name="cid" type="hidden" value="87" /><input id="sort" name="sort" type="hidden" value="default" /></div>
+                </form>
+              </div>
+
+            </div>
+        </dt>
+        <dd class="merc-tabcon">
+            <ul class="merc-list">
+
+            </ul>
+        </dd>
+    </dl>
+
+    <div class="pagination"><a class="previous_page" rel="prev" href="/exhibit?cid=87&amp;page=2&amp;property=8&amp;sort=default">上一页</a> <a rel="start" href="/exhibit?cid=87&amp;page=1&amp;property=8&amp;sort=default">1</a> <a rel="prev" href="/exhibit?cid=87&amp;page=2&amp;property=8&amp;sort=default">2</a> <span class="next_page disabled">下一页</span></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!--data-peer-id 要放user_id -->
+<!-- 登录 -->
+<dl id="login" class="pop-layer">
+  <dd class="main">
+    <h4 class="posi-rel">登录<em>没有账号？马上<i class="register">注册</i></em></h4>
+    <form accept-charset="UTF-8" action="" class="login-form" id="user-login-form" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="vOaz8ZdJ4scsLwG6OXogwurkZx6C/La/7qG+6Zfx7IM=" /></div>
+        <p class="error">手机号码或者密码不正确</p>
+        <label>手机号码：<input type="text" maxlength="11" name="name"></label>
+        <label class="nmar">密码：<input type="password" name="password" maxlength="16"></label>
+
+        <p class="posi-rel"><input type="checkbox" class="checkbox" name="remember">记住我 <i class="lost-psw">忘记密码</i></p>
+        <input id="back_url" name="back_url" type="hidden" value="/exhibit?cid=87&amp;page=3&amp;property=8&amp;sort=default" />
+        <input type="submit" name="login-submit" class="submit" value="登录">
+
+        <p class="other-login posi-rel"><em>合作网站账号登录</em></p>
+
+        <p>
+          <a href="http://www.hunliji.com/login/connect_wei_bo1?back_url=http%253A%252F%252Fwww.hunliji.com%252Fexhibit%253Fcid%253D87%2526page%253D3%2526property%253D8%2526sort%253Ddefault" class="login-sina">sina</a>
+          <a href="http://auth.marrymemo.com/login/connect_qq1?back_url=http%3A%2F%2Fwww.hunliji.com%3A80%2Fexhibit%3Fcid%3D87%26page%3D3%26property%3D8%26sort%3Ddefault" class="login-qq">qq</a>
+        </p>
+</form>  </dd>
+</dl>
+<!-- 手机注册 -->
+<dl id="reg-phone" class="pop-layer reg-pwd-main">
+  <div class="login-form">
+    <dd class="main" id="step-1">
+      <label class="label-a">手机号码：<input type="text" maxlength="11" name="phone" class="user_phone"></label>
+      <input type="button" class="get-code submit" id="get-code" value="获取验证码">
+      <p id="step_1_error" style="color: red;"></p>
+    </dd>
+
+    <dd class="main" id="step-2">
+      <p>验证码已经发送到 <span id="phone_num"></span></p>
+      <label class="label-b posi-rel">
+        请输入验证码：
+        <input type="text" maxlength="6" id="user_code">
+          <span class="re-code">
+            <!-- <em id="re-send">59秒</em>  -->
+            <!-- 重发验证码 -->
+            <em class="re-send dis submit">获取验证码</em>
+          </span>
+      </label>
+      <p id="step_2_error" style="color: red;"></p>
+      <input type="button" class="get-code submit" id="get-user" value="下一步">
+    </dd>
+
+    <dd class="main" id="step-3">
+      <label>取一个昵称：<input type="text" maxlength="16" id="user_name"></label>
+      <label>设置密码：<input type="password" maxlength="16" id="user_pwd"></label>
+      <p id="step_3_error" style="color: red;"></p>
+      <input type="submit" class="get-code submit" id="get-comp" value="完成">
+    </dd>
+
+  </div>
+</dl>
+
+<!-- 重置密码 -->
+<dl id="reset-pwd" class="pop-layer reg-pwd-main">
+  <div class="login-form">
+
+    <dd class="main" id="reset-step-1">
+      <label class="label-a">手机号码：<input type="text" maxlength="11" name="phone" class="user_reset_phone" ></label>
+      <input type="button" class="get-code submit" id="get-reset-code" value="获取验证码">
+      <p id="reset_step_1_error" style="color: red;"></p>
+    </dd>
+
+    <dd class="main" id="reset-step-2">
+      <p>验证码已经发送到 <span id="reset_phone_num"></span></p>
+      <label class="label-b posi-rel">
+        请输入验证码：
+        <input type="text" maxlength="6" id="reset_user_code">
+          <span class="re-code">
+            <!-- <em id="re-send">59秒</em>  -->
+            <!-- 重发验证码 -->
+            <em class="re-send dis submit">获取验证码</em>
+          </span>
+      </label>
+      <p id="reset_step_2_error" style="color: red;"></p>
+      <input type="button" class="get-code submit" id="reset-user" value="下一步">
+    </dd>
+
+    <dd class="main" id="reset-step-3">
+      <label>新密码：<input type="password" maxlength="16" id="password"></label>
+      <label>重复密码：<input type="password" maxlength="16" id="password_confirm"></label>
+      <p id="reset_step_3_error" style="color: red;"></p>
+      <input type="submit" class="get-code submit" id="reset-comp" value="完成">
+    </dd>
+
+  </div>
+</dl>
+
+
+<script src="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/common/v4/layout-53ffca47a35e0f07c3dc1483ceb568996bed20bdee42be1b8660b45c93fb7029.js"></script>
+<script src="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/exhibit/layout-85bd61cdb75d1c555ecd37e03eedae824616cdbc43c3a9f411a8836e7bc95c0e.js"></script>
+
+
+<script src="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/exhibit/caseSale-ac86dfea1a58f4e5e3c51681a8a33fba193f70fd1c2041aef3280c02621ba0d7.js"></script>
+   <script>
+        $(function(){
+            timePlay.timeStyle()
+            smc()
+            function smc(){
+            var _smcGz=$('.smc_gz'),_smc=$('.smc');
+            _smcGz.on('click',function(){
+                var _merid=$(this).attr('merId')
+               if($(this).hasClass('hover')){
+                   $(this).removeClass('hover');
+                   $(this).text('收藏');
+                   $(this).attr('title','收藏');
+                   delSmc(_merid)
+               }else{
+                    $(this).addClass('hover');
+                    $(this).text('已收藏');
+                    $(this).attr('title','取消收藏');
+                   postSmc(_merid)
+                }
+            })
+            _smc.on('click',function(){
+                fw.common.dialog.page('#login');
+            })
+            function postSmc(mer){
+                $.ajax({
+                      url: "/user/collects/",
+                      type: "post",
+                      data: {type:'Merchant',id:mer}
+                  })
+             }
+             function delSmc(mer){
+                $.ajax({
+                      url: "/user/collects/"+mer,
+                      type: "delete",
+                      data: {type:'Merchant'}
+                  })
+             }
+
+        }
+        cd_type()
+        function cd_type(){
+            var cd_id,property;
+            function getUrlParams(){
+                var urlParams;
+                var match,
+                pl = /\+/g,
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function(s) {
+                    return decodeURIComponent(s.replace(pl, " "));
+                },
+                query = window.location.search.substring(1);
+                urlParams = {};
+                while (match = search.exec(query))
+                   urlParams[decode(match[1])] = decode(match[2]);
+                return urlParams;
+            }
+            function OnChatLoad(){
+                var paras = getUrlParams(),_mercBox=$('.merc-subnav'),_tab=$('.tabs-left').children();
+                cd_id = paras["commodity_type"];
+                property =  paras["property"];
+
+                   if (property == 2){
+                        _tab.eq(1).addClass('hover').siblings().removeClass('hover')
+                   }else if (property == 6){
+                        _tab.eq(2).addClass('hover').siblings().removeClass('hover')
+                   }else if (property == 7){
+                        _tab.eq(3).addClass('hover').siblings().removeClass('hover')
+                   }else if (property == 8){
+                        _tab.eq(4).addClass('hover').siblings().removeClass('hover')
+                   }else if (property == 9){
+                        _tab.eq(5).addClass('hover').siblings().removeClass('hover')
+                   }else if (property == 11){
+                        _tab.eq(6).addClass('hover').siblings().removeClass('hover')
+                   }else {
+                     _tab.eq(0).addClass('hover').siblings().removeClass('hover')
+                   }
+
+             }
+             //OnChatLoad()
+        }
+    })
+   </script>
+
+
+
+<!--全局聊天框 需要放在加载 jquery fw 等通用库之后-->
+<input id="user_token" name="user_token" type="hidden" />
+<input id="chat_host" name="chat_host" type="hidden" value="message.hunliji.com/" />
+<input id="app_host" name="app_host" type="hidden" value="http://www.hunliji.com/" />
+<input id="is_merchant" name="is_merchant" type="hidden" value="false" />
+<input id="user_nick" name="user_nick" type="hidden" />
+<input id="user_avatar" name="user_avatar" type="hidden" value="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/avatar-b5f64a0332511dbac301bbd3d476af3bd6d5fd2e3b6956ed15848fd74b5483a0.jpg" />
+<input id="user_id" name="user_id" type="hidden" />
+
+<script src="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/chat/app-e6cb0fc2082183bb8c7708c6a14391fc6d9dcf69120e45ccae10b4710407222d.js"></script>
+<link href="http://7u2iwv.com2.z0.glb.qiniucdn.com/assets/chat/base-9bf1ad48b3a95137876b6231a2a3e3d38dadff5a99c71896ce95dc304803a571.css" media="screen" rel="stylesheet" />
+
+
+<div>
+
+  <!-- 全局私信  右下角-->
+  <div id="fixed-msg" ng-switch="mainCtrl.status">
+    <p class="msg-con" ng-class="{hover: mainCtrl.newMessage}" ng-switch-when="normal" ng-click="mainCtrl.showDialog()">
+      <i class="msg-icon"></i>
+      <em class="tips-a">私信聊天</em>
+      <em class="tips-b">你有新私信</em>
+    </p>
+
+    <!-- 不支持 -->
+    <p class="non-msg" ng-switch-when="notSupport">
+      <i class="msg-icon"></i>你的浏览器不支持私信
+      <em>建议使用IE10以上版本或谷歌浏览器</em>
+    </p>
+
+    <!--服务器出错-->
+    <p class="non-msg" ng-switch-when="error">
+      <i class="msg-icon"></i>错误
+    </p>
+
+    <!--服务器出错-->
+    <p class="non-msg" ng-switch-when="notLogin">
+      <i class="msg-icon"></i>未登录
+    </p>
+  </div>
+  <!-- 右下角结束 -->
+
+  <!-- 全局私信 弹窗 -->
+  <div>
+
+    <div class="msg-layer" id="msg-layer" ng-controller="ChatController as chatCtrl" ng-show="mainCtrl.dialogVisiable">
+      <!-- 对话标题 -->
+      <h3 class="msg-tit">
+        <p ng-show="chatCtrl.currentChannel">
+          <em class="msg-name">{{chatCtrl.currentChannel.peer.nick}}</em> 对话中
+        </p>
+        <em class="close" ng-click="mainCtrl.hideDialog()"></em>
+      </h3>
+
+      <dl class="msg-main">
+        <dt class="msg-user nano">
+          <!-- 用户列表 -->
+        <ul class="msg-list content" ng-controller="ChannelsController as channelsCtrl">
+          <!-- 当前对话加 hover类 -->
+          <li class="msg-row"
+              ng-repeat="channel in chatCtrl.channels"
+              ng-controller="ChannelController as channelCtrl"
+              ng-class="{hover: chatCtrl.currentChannel === channel, opus: channel.peer.is_merchant}"
+          >
+            <!--套一个a标签-->
+            <!-- opus ?imageView/1/w/46/h/28/format/jpg -->
+            <img class="logo" ng-src="{{channel.peer.avatar}}" alt="" >
+            <span ng-click="chatCtrl.switchChannel(channel)">{{channel.peer.nick}}</span>
+            <i class="close" ng-click="chatCtrl.removeChannel(channel)">×</i>
+            <!--是否有未读 &ndash;&gt;-->
+            <i class="tips" ng-show="channel.hasNew"></i>
+          </li>
+
+        </ul>
+        </dt>
+        <dd class="msg-content" ng-show="chatCtrl.messageVisiable">
+          <dl class="msg-box">
+            <dt class="msg-history">
+              ------------------ <em>查看更多消息</em> ------------------
+            </dt>
+
+            <dd class="msg-wrap nano">
+              <!-- 消息列表 -->
+              <ul class="msg-mod content">
+
+                <!-- 左边消息 	右边直接添加 right 类   -->
+                <li class="msg-line" ng-repeat="message in chatCtrl.messages track by $index">
+                  <div class="msg-linerow" ng-class="{right: message.by_me}">
+                    <!-- 显示文字 -->
+                    <h3 ng-if="message.content" ng-bind-html="message.content | emoji"></h3>
+
+                    <!-- 显示图片 -->
+                    <h3 ng-if="message.media_content">
+                      <img
+                        ng-src="{{message.media_content.path}}"
+                        alt="" class="msgPic"
+                        ng-click="mainCtrl.showImage($event)"
+                        data-width="{{message.media_content.width}}"
+                        data-height="{{message.media_content.height}}">
+                    </h3>
+
+                    <p ng-if="message.content || message.media_content">{{message.created_at | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+
+                    <!--显示作品-->
+                    <a href="#" class="msg-meal" ng-if="message.product_content">
+                      <img ng-src="{{message.product_content.cover_path}}?imageView/1/w/160/h/107" alt="">
+
+                      <h3>{{message.product_content.title}}</h3>
+                      <!--<em class="price">￥9999999</em>-->
+                    </a>
+
+                    <i class="icon"></i>
+
+                    <i class="error" title="发送失败，点击重发" ng-show="message.error" ng-click="chatCtrl.reSend(message)">!</i>
+
+                  </div>
+                </li>
+
+              </ul>
+            </dd>
+          </dl>
+        </dd>
+      </dl>
+      <div class="msg-btn">
+        <a href="#" class="all-msg">查看全部私信</a>
+
+        <div class="msg-reply" ng-show="chatCtrl.messageVisiable">
+          <form action="">
+            <textarea class="msg-txt" ng-model="chatCtrl.content" ng-keypress="chatCtrl.sendText($event)" ></textarea>
+            <span class="pic-btn" ng-click="chatCtrl.sendImg($event)">图片button</span>
+            <button class="btn" type="button" ng-click="chatCtrl.sendText()">发送</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <img alt="" id="layerImg" ng-src="{{mainCtrl.popImagePath}}" src="http://marry.qiniudn.com/o_19679pbee1rn31q271tk11dg417svh.png">
+    <!-- 全局私信 结束 -->
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
