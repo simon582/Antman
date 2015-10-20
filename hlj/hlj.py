@@ -102,9 +102,12 @@ def save(prod):
     print >> file, resline.encode('utf-8')
 
 if __name__ == '__main__':
-    city_id = sys.argv[1]
-    for type_id, type_name in type_dict.items():
-        page = 1
-        while work(city_id, type_id, type_name, str(page)):
-            page += 1
+    with open('city_ids') as city_file:
+        city_ids = city_file.readlines()
+        for city_id in city_ids:
+            city_id = city_id.strip()
+            for type_id, type_name in type_dict.items():
+                page = 1
+                while work(city_id, type_id, type_name, str(page)):
+                    page += 1
     print 'Crawl finished!'

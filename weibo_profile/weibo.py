@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import time
 import urllib2
 import urllib
 import cookielib
@@ -33,34 +33,46 @@ def add(key, prod):
     return ','
 
 def save_csv(prod):
-    file = open('xsh.csv','a')
+    file = open('result.csv','a')
     resline = ""
     resline += add('id', prod)
+    resline += add('wb_name', prod)
     resline += add('date', prod)
+    resline += add('quote_reason', prod)
     resline += add('content', prod)
+    #resline += add('img', prod)
     resline += add('quote', prod)
     resline += add('comment', prod)
     resline += add('like', prod)
     print >> file, resline.encode('utf-8')
 
-def work(id, page):
-    list_url = 'http://weibo.cn/' + id + '/profile?filter=1&page=' + str(page)
+def work(wb_name, id, page):
+    list_url = 'http://weibo.cn/' + id + '/profile?&page=' + str(page)
     print list_url
     hxs = Selector(text=get_html_by_data(list_url, use_cookie=True))
     wb_list = hxs.xpath('//div[@class="c"]')
     if len(wb_list) <= 3:
-        return
+        return False
     print 'Find ' + str(len(wb_list)) + ' weibo elements'
     for wb in wb_list:
         try:
             prod = {}
             prod['id'] = id
+            prod['wb_name'] = wb_name
             prod['content'] = ""
             content_list = wb.xpath('.//span[@class="ctt"]/a/text()|.//span[@class="ctt"]/text()|.//span[@class="ctt"]/span/text()')
             for elem in content_list:
                 prod['content'] += elem.extract()
             print prod['content']
-
+            prod['quote_reason'] = ''
+            quote_div = wb.xpath('./div[3]')
+            if quote_div:
+                quote_list = quote_div.xpath('.//text()')
+                for quote in quote_list:
+                    if quote.extract().find('赞[') != -1:
+                        break
+                    prod['quote_reason'] += quote.extract().strip()
+            print 'quote_reason: ' + prod['quote_reason']
             date = wb.xpath('.//span[@class="ct"]/text()')[0].extract()
             prod['date'] = date.split(' ')[0]
             if prod['date'].find('今天') != -1 or prod['date'].find('前') != -1:
@@ -68,6 +80,18 @@ def work(id, page):
             elif prod['date'].find('月') != -1:
                 prod['date'] = '2015-' + prod['date'].replace('月','-').replace('日','')
             print prod['date']
+            if prod['date'].find('2012') != -1 or prod['date'].find('2013-5') != -1 or prod['date'].find('2013-6') != -1:
+                print 'out of date'
+                return False
+
+            '''
+            img_list = wb.xpath('.//img[@class="ib"]')
+            if len(img_list) > 0:
+                prod['img'] = '1'
+            else:
+                prod['img'] = '0'
+            print 'has img: ' + prod['img']
+            '''
 
             text_list = wb.xpath('.//a/text()')
             for text in text_list:
@@ -91,16 +115,22 @@ def work(id, page):
         except Exception as e:
             print e
             continue
-
-    work(id, page + 1)
+    return True
 
 if __name__ == '__main__':
     id_list = []
-    with open('id.conf')  as id_file:
-       id_list = id_file.readlines()
-    for id in id_list:
+    with open('id.conf') as id_file:
+        id_list = id_file.readlines()
+    for line in id_list:
         try:
-            work(id.strip(), 1)
+            id = line.strip().split(' ')[1]
+            wb_name = line.strip().split(' ')[0]
+            page = 1
+            while True:
+                if work(wb_name, id, page):
+                    page += 1
+                else:
+                    break
         except Exception as e:
             print e
             continue

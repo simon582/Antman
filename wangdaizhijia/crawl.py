@@ -92,7 +92,7 @@ def work(keyword, page):
     return True
 
 if __name__ == "__main__":
-    with open('keyword_list','r') as keyword_file:
+    with open('keyword_list_new','r') as keyword_file:
         for keyword in keyword_file.readlines():
             page = 1
             while True:

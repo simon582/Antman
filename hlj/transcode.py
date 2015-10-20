@@ -4,10 +4,11 @@ import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-with open('out.csv','r') as input_file, open('out_gbk.csv', 'w') as output_file:
-    lines = input_file.readlines()
-    for line in lines:
-        try:
-            print >> output_file, line.strip().replace(';',' ').replace('&nbsp',' ').replace('\r','').replace('\n','').encode('gbk')
-        except:
-            continue
+for parent, dirnames, filenames in os.walk('result/'):
+    for filename in filenames:
+        print filename
+        if filename.find('csv') != -1:
+            with open('result/' + filename, 'r') as input_file, open('gbk/' + filename, 'w') as output_file:
+                lines = input_file.readlines()
+                for line in lines:
+                    print >> output_file, line.strip().encode('gbk', 'ignore')
