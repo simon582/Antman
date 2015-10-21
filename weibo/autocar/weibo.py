@@ -130,8 +130,13 @@ def work(keyword,year,month,day,first):
     if first:
         cur_date = datetime.datetime(year, month, day)
     else:
+<<<<<<< Updated upstream
         cur_date = datetime.datetime(2015, 8, 15)
     end_date = datetime.datetime(2015, 8, 1)
+=======
+        cur_date = datetime.datetime(2015, 9, 15)
+    end_date = datetime.datetime(2015, 9, 1)
+>>>>>>> Stashed changes
     for day in range(0, 365):
         dt_date = cur_date - datetime.timedelta(days=day)
         if dt_date < end_date:

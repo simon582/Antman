@@ -225,7 +225,7 @@ def work(start_url, start_page):
 if __name__ == '__main__':
     start_page = int(sys.argv[1])
     first = True
-    for id in range(28, 2001):
+    for id in range(2, 2001):
         try:
             print 'current id: ' + str(id)
             if first:

@@ -2,6 +2,7 @@
 from scrapy import Selector
 import requests
 import sys
+import time
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -11,11 +12,18 @@ def get_html(url):
         'Host':'search.sina.com.cn',
         'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',
     }
-    r = requests.get(url, headers=headers)
-    html = r.text
-    with open('debug.html','w') as debug_file:
-        print >> debug_file, html.encode('utf-8')
-    return html
+    while True:
+        r = requests.get(url, headers=headers)
+        html = r.text
+        if len(html) == 0:
+            time.sleep(1)
+            continue
+        if html.find('The server returned an invalid or incomplete response') != -1:
+            time.sleep(1)
+            continue
+        with open('debug.html','w') as debug_file:
+            print >> debug_file, html.encode('utf-8')
+        return html
 
 def get_max_page(company_name, keyword):
     search_url = "http://search.sina.com.cn/?q=" + company_name + "+" + keyword + "&range=all&c=news&sort=time"
@@ -68,9 +76,14 @@ def work(company_name, keyword, dst_page):
     news_list = hxs.xpath('//div[@class="box-result clearfix"]')
     print 'news_cnt: ' + str(len(news_list))
     for news in news_list:
-        info = crawl_part(news)
-        write_csv(company_name, keyword, info)
-        #import pdb;pdb.set_trace()
+        try:
+            info = crawl_part(news)
+            write_csv(company_name, keyword, info)
+            #import pdb;pdb.set_trace()
+        except Exception as e:
+            print 'Occur an error:'
+            print e
+            continue
  
 if __name__ == "__main__":
     com_list = []

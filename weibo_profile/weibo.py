@@ -46,6 +46,17 @@ def save_csv(prod):
     resline += add('like', prod)
     print >> file, resline.encode('utf-8')
 
+<<<<<<< Updated upstream
+=======
+def exist(content):
+    e = False
+    with open('result.csv','r') as res_file:
+        text = res_file.read()
+        if text.find(content) != -1:
+            e = True
+    return e
+
+>>>>>>> Stashed changes
 def work(wb_name, id, page):
     list_url = 'http://weibo.cn/' + id + '/profile?&page=' + str(page)
     print list_url
@@ -64,6 +75,12 @@ def work(wb_name, id, page):
             for elem in content_list:
                 prod['content'] += elem.extract()
             print prod['content']
+<<<<<<< Updated upstream
+=======
+            if exist(prod['content']):
+                print 'Current weibo has existed!!'
+                continue
+>>>>>>> Stashed changes
             prod['quote_reason'] = ''
             quote_div = wb.xpath('./div[3]')
             if quote_div:
@@ -121,7 +138,11 @@ if __name__ == '__main__':
     id_list = []
     with open('id.conf') as id_file:
         id_list = id_file.readlines()
+<<<<<<< Updated upstream
     for line in id_list:
+=======
+    for line in id_list[::-1]:
+>>>>>>> Stashed changes
         try:
             id = line.strip().split(' ')[1]
             wb_name = line.strip().split(' ')[0]
