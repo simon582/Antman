@@ -29,7 +29,7 @@ def get_max_page(company_name, keyword):
     search_url = "http://search.sina.com.cn/?q=" + company_name + "+" + keyword + "&range=all&c=news&sort=time"
     hxs = Selector(text=get_html(search_url))
     text = hxs.xpath('//div[@class="l_v2"]/text()')[0].extract()
-    news_cnt = int(text.split('新闻')[1].split('篇')[0])
+    news_cnt = int(text.split('新闻')[1].split('篇')[0].replace(',',''))
     if news_cnt % 10 != 0:
         max_page = news_cnt / 10 + 1
     else:

@@ -16,25 +16,22 @@ def add(key, prod):
         return prod[key].replace('\r','').replace('\n','').replace(',',' ') + ','
     return ','
 
-def save_csv(cat, prod):
-    file = open(cat+'.csv','a')
+def save_csv(prod):
+    file = open('result.csv','a')
     resline = ""
+    resline += add('city', prod)
     resline += add('district', prod)
-    resline += add('region', prod)
+    #resline += add('region', prod)
     resline += add('shop_name', prod)
+    resline += add('dp_cnt', prod)
     resline += add('addr', prod)
     resline += add('tel', prod)
     resline += add('url', prod)
     print >> file, resline.encode('utf-8')
 
-def work(cat):
-    cursor = shop_table.find({"cat":cat})
+def work():
+    cursor = shop_table.find()
     for prod in cursor:
-        save_csv(cat, prod)
+        save_csv(prod)
 
-#work("ms")
-#work("xxyl")
-#work("lr")
-#work("jh")
-#work("qz")
-work("shfw")
+work()

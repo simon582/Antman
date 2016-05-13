@@ -4,7 +4,7 @@ import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-with open('res_nodup.csv','r') as input_file, open('out_gbk.csv', 'w') as output_file:
+with open('res_new.csv','r') as input_file, open('temp_gbk.csv', 'w') as output_file:
     lines = input_file.readlines()
     for line in lines:
         try:

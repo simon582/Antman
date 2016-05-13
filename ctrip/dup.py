@@ -2,7 +2,7 @@
 
 hotel_dict = {}
 
-with open('good.csv', 'r') as res_file:
+with open('res_new.csv', 'r') as res_file:
     for line in res_file.readlines():
         name = line.split(',')[0] + line.split(',')[1]
         if not name in hotel_dict:
