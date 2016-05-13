@@ -6,50 +6,81 @@ import requests
 import random
 from scrapy import Selector
 import pymongo
+from random import randint
+import random
 import traceback
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 curr_ip_pos = 0
 ip_list = []
-def reset():
-    global curr_ip_pos
-    global ip_list
-    response = requests.get('http://121.41.122.106:8080/ip/')
-    ip_list = response.text.split(' ')
-    for i in range(len(ip_list)):
-        ip_list[i] = ip_list[i].strip()
-    curr_ip_pos = 0
 
-def get_html_by_data(url, use_cookie=False):
-    global curr_ip_pos
+def read_ip():
+    global ip_list
+    with open('ip.conf') as cnf_file:
+        text = cnf_file.read()
+        ip_list = text.strip().split('\n')
+
+def get_html_by_data(url, use_cookie=False, fake_ip=False):
+    global ip_list
+    #if len(ip_list) == 0:
+    #    print 'no available proxy ip'
+    #    exit(0)
     while True:
         try:
-            proxy = {'http':ip_list[curr_ip_pos]}
+            print 'available ip count:' + str(len(ip_list))
+            cur_ip = random.choice(ip_list)
+            proxy = {'http':'http://'+cur_ip}
             response = requests.get(url, proxies=proxy, timeout=3)
             if response.status_code != requests.codes.ok:
-                curr_ip_pos += 1
-                print 'Get Error! Try Again! curr_ip_pos: ' + str(curr_ip_pos) 
-                if curr_ip_pos >= len(ip_list) - 1:
-                    reset()
+                print 'Get Error! Try Again! ip: ' + cur_ip
                 continue
             html = response.text
             html_file = open('test.html','w')
             print >> html_file, html
             return html
-        except:
-            curr_ip_pos += 1
-            print 'Get Error! Try Again! curr_ip_pos: ' + str(curr_ip_pos) 
-            if curr_ip_pos >= len(ip_list) - 1:
-                reset()
+        except Exception as e:
+            print e
+            print 'Get Error! Try Again! ip: ' + cur_ip
+            #ip_list.remove(cur_ip)
+            traceback.print_exc()
+
+def get_html_by_data_2(url, use_cookie=False, fake_ip=False):
+    headers = {
+        'Host': 'hotels.ctrip.com',
+        'Referer': 'http://hotels.ctrip.com/hotel/beijing1',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36',
+    }
+    if fake_ip:
+        ip = "%s.%s.%s.%s" % (str(randint(0,255)), str(randint(0,255)), str(randint(0,255)), str(randint(0,255)))
+        headers["X-Forwarded-For"] = ip
+    r = requests.get(url, headers=headers)
+    html = r.text
+    with open('test.html','w') as test_file:
+        print >> test_file, html
+    return html
 
 def add(key, prod):
     if key in prod:
         return prod[key].replace(',',' ').replace('\n','').replace('\r','').replace('\t','').strip() + ','
     return ','
 
+def write_csv(prod):
+    with open('result.csv', 'a') as csv_file:
+        resline = ""
+        resline += add('title', prod) 
+        resline += add('name', prod) 
+        resline += add('addr', prod) 
+        resline += add('star', prod) 
+        resline += add('open_year', prod) 
+        resline += add('room_cnt', prod) 
+        resline += add('tel', prod) 
+        resline += add('url', prod)
+        print >> csv_file, resline.encode('utf-8')
+
 def crawl_prod(url, prod):
-    hxs = Selector(text=get_html_by_data(url))
+    hxs = Selector(text=get_html_by_data(url, fake_ip=True))
+    prod['url'] = url
     try:
         prod['star'] = hxs.xpath('//div[@class="grade"]/span/@title')[0].extract()
         print 'star: ' + prod['star']
@@ -66,8 +97,9 @@ def crawl_prod(url, prod):
         print e
 
 def crawl_list(title, list_url):
-    hxs = Selector(text=get_html_by_data(list_url))
-    item_list = hxs.xpath('//div[@id="hotel_list"]/div[@class="searchresult_list"]')
+    print 'crawl list:' + list_url
+    hxs = Selector(text=get_html_by_data(list_url, fake_ip=True))
+    item_list = hxs.xpath('//div[@id="hotel_list"]/div[@class="searchresult_list "]')
     for item in item_list:
         try:
             url = item.xpath('.//h2[@class="searchresult_name"]/a/@href')[0].extract()
@@ -91,7 +123,7 @@ def work(start_url, start_page):
     retry_times = 0
     while retry_times < 3:
         try:
-            hxs = Selector(text=get_html_by_data(start_url))
+            hxs = Selector(text=get_html_by_data(start_url, fake_ip=True))
             max_page = hxs.xpath('//div[@class="c_page_list layoutfix"]/a[@rel="nofollow"]/text()')[0].extract().strip()
             title = hxs.xpath('//h1/text()')[0].extract().strip()
             break
@@ -111,10 +143,11 @@ def work(start_url, start_page):
     return True
 
 if __name__ == '__main__':
-    reset()
-    start_page = int(sys.argv[1])
+    read_ip()
+    start_city = int(sys.argv[1])
+    start_page = int(sys.argv[2])
     first = True
-    for id in range(1, 2001):
+    for id in range(start_city, 2001):
         try:
             print 'current id: ' + str(id)
             if first:
