@@ -92,7 +92,7 @@ if __name__ == '__main__':
     patch_cnt = 0
     part = int(sys.argv[1])
     with open('empty.csv', 'r') as res_file, open('res_new.csv', 'a') as out_file:
-        for line in res_file.readlines()[::-1]:
+        for line in res_file.readlines():
             patch_cnt += 1
             if patch_cnt % 40 != part:
                 continue
