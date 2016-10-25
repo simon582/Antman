@@ -93,13 +93,15 @@ def write_csv(prod):
 
 def work(prod):
     print 'detail_url:' + prod['url']
-    hxs = Selector(text=get_html_by_data(prod['url']))
+    hxs = Selector(text=get_html_by_data(prod['url'], use_cookie=True))
     prod['chinese'] = prod['title']
     ori_title = hxs.xpath('//div[@id="content"]/h1/span/text()')[0].extract()
     print 'ori_title:' + ori_title
     prod['english'] = get_english_title(ori_title)
     print 'chinese:' + prod['chinese']
     print 'english:' + prod['english']
+    prod['year'] = hxs.xpath('//span[@class="year"]/text()')[0].extract()
+    prod['year'] = prod['year'].replace('(','').replace(')','')
     print 'year:' + prod['year']
     try:
         prod['mainpic'] = hxs.xpath('//div[@id="mainpic"]/a/img/@src')[0].extract()
@@ -269,25 +271,25 @@ def work(prod):
     except:
         pass
     write_csv(prod)
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
 
 def get_doulie_length(prod):
     doulie_url = prod['url'] + 'doulists'
-    hxs = Selector(text=get_html_by_data(doulie_url))
+    hxs = Selector(text=get_html_by_data(doulie_url, use_cookie=True))
     prod['doulie'] = hxs.xpath('//div[@class="paginator"]/span[@class="count"]/text()')[0].extract().split('共')[1].split('个')[0]
     print 'doulie:' + prod['doulie']
 
-with open('movie_url.csv', 'r') as movie_file:
+with open('patch2.csv', 'r') as movie_file:
     lines = movie_file.readlines()
     total_cnt = len(lines)
     cur = 0
     for line in lines:
         cur += 1
-        res = line.strip().split(',')
+        res = line.strip().split(';')
         prod = {}
         prod['title'] = res[0]
-        prod['year'] = res[1]
-        prod['url'] = res[2]
+        #prod['year'] = res[1]
+        prod['url'] = res[1]
         try:
             work(prod)
             print str(cur) + '/' + str(total_cnt) + ' ' + prod['title'] + ' ' + prod['url']

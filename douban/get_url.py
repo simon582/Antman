@@ -32,10 +32,15 @@ def work(prod):
     search_url = 'https://movie.douban.com/subject_search?search_text=%s&cat=1002' % prod['title']
     print 'search:' + search_url
     hxs = Selector(text=get_html_by_data(search_url))
-    import pdb;pdb.set_trace()
-    prod['url'] = hxs.xpath('//div[@class="pl2"]/a/@href')[0].extract()
+    f = False
+    for a in hxs.xpath('//div[@class="pl2"]/a'):
+        cur_title = a.xpath('./text()')[0].extract().replace('/','').strip()
+        if cur_title.find(prod['title']) != -1:
+            prod['url'] = a.xpath('./@href')[0].extract()
+            f = True
+            break
 
-with open('err.csv', 'r') as movie_file, open('movie_url.csv', 'a') as url_file:
+with open('movie_title.csv', 'r') as movie_file, open('movie_url.csv', 'a') as url_file:
     lines = movie_file.readlines()
     total_cnt = len(lines)
     cur = 0
@@ -48,6 +53,10 @@ with open('err.csv', 'r') as movie_file, open('movie_url.csv', 'a') as url_file:
         try:
             print str(cur) + '/' + str(total_cnt) + ' ' + prod['title']
             work(prod)
+            if not 'url' in prod:
+                with open('cant.csv', 'a') as cant_file:
+                    print >> cant_file, line.strip().encode('utf-8')
+                continue
             print 'detail:' + prod['url']
             resline = '%s,%s,%s' % (prod['title'], prod['year'], prod['url'])
             print >> url_file, resline.encode('utf-8')

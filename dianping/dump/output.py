@@ -6,7 +6,7 @@ sys.setdefaultencoding('utf-8')
 
 try:
     client = MongoClient("127.0.0.1",27017)
-    shop_table = client["dianping"]["shop"]
+    shop_table = client["dianping"]["hotel"]
 except Exception as e:
     print e
     exit(-1)
@@ -20,7 +20,7 @@ def save_csv(prod):
     file = open('result.csv','a')
     resline = ""
     resline += add('city', prod)
-    resline += add('district', prod)
+    #resline += add('district', prod)
     #resline += add('region', prod)
     resline += add('shop_name', prod)
     resline += add('dp_cnt', prod)
